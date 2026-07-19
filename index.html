@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Finance Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <meta name="theme-color" content="#0e1b2a">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    @media (max-width: 580px) {
+      #image-box {
+        display: block !important;
+        width: 125px;
+        height: 42px;
+        position: absolute;
+        left: 20px;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      #image-box img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== login page start ===== -->
+  <!--    login screen   -->
+  <div id="loginPage" class="login-wrap">
+    <div class="login-card">
+      <div class="auth-mark">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2.5" y="6" width="19" height="14" rx="2" stroke="currentColor" stroke-width="1.6" />
+          <path d="M2.5 10H21.5" stroke="currentColor" stroke-width="1.6" />
+          <circle cx="12" cy="15" r="2.1" stroke="currentColor" stroke-width="1.6" />
+          <path d="M7 6V5a5 5 0 0 1 10 0v1" stroke="currentColor" stroke-width="1.6" />
+        </svg>
+      </div>
+      <h2 class="auth-title">Welcome Back</h2>
+      <p class="tagline">Login to FinTrack Pro</p>
+      <div class="form-group" style="text-align:left;">
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" placeholder="Enter your username">
+      </div>
+      <div class="form-group" style="text-align:left;">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password">
+      </div>
+
+      <div class="form-error" id="loginError">Invalid username or password.</div>
+
+      <button class="btn btn-login btn-block" id="loginSubmitBtn">Login</button>
+      <p class="switch-text">Don't have an account? <a href="#" id="goToRegisterLink">Register here</a></p>
+    </div>
+  </div>
+
+  <!--------- register page, naya account banayega --------->
+  <div id="registerPage" class="login-wrap hidden">
+    <div class="login-card">
+      <div class="auth-mark">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2.5" y="6" width="19" height="14" rx="2" stroke="currentColor" stroke-width="1.6" />
+          <path d="M2.5 10H21.5" stroke="currentColor" stroke-width="1.6" />
+          <circle cx="12" cy="15" r="2.1" stroke="currentColor" stroke-width="1.6" />
+          <path d="M7 6V5a5 5 0 0 1 10 0v1" stroke="currentColor" stroke-width="1.6" />
+        </svg>
+      </div>
+      <h2 class="auth-title">Create Account</h2>
+      <p class="tagline">Join FinTrack Pro</p>
+      <!-- <br> -->
+      <div class="form-group" style="text-align:left;">
+        <label for="registerUsername">Choose a Username</label>
+        <input type="text" id="registerUsername" placeholder="Enter a username">
+      </div>
+      <div class="form-group" style="text-align:left;">
+        <label for="registerPassword">Password</label>
+        <input type="password" id="registerPassword" placeholder="Enter a password">
+      </div>
+
+      <div class="form-error" id="registerError">Please fill both fields.</div>
+
+      <button class="btn btn-register btn-block" id="registerSubmitBtn">Register</button>
+
+      <p class="switch-text">Already have an account? <a href="#" id="goToLoginLink">Login here</a></p>
+    </div>
+  </div>
+
+  <!-- ====   app start     ==== -->
+  <div id="appWrap" class="hidden">
+
+    <!-- top strip design -->
+    <div class="top-strip"></div>
+
+    <!-- left side sidebar, navigation k liy -->
+    <div class="sidebar">
+      <div class="brand">
+        <span class="brand-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <rect x="2.5" y="6" width="19" height="14" rx="2" stroke="currentColor" stroke-width="1.7" />
+            <path d="M2.5 10H21.5" stroke="currentColor" stroke-width="1.7" />
+            <circle cx="12" cy="15" r="2.1" stroke="currentColor" stroke-width="1.7" />
+            <path d="M7 6V5a5 5 0 0 1 10 0v1" stroke="currentColor" stroke-width="1.7" />
+          </svg></span>
+        <div>
+          <div class="brand-name">FinTrack Pro</div>
+          <div class="brand-sub">Enterprise Finance</div>
+        </div>
+      </div>
+
+      <!-- dashboard aur setting -->
+      <div class="sidebar-nav">
+        <button class="side-link active" id="navDashboard">
+          <span class="side-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="3" width="7.5" height="9" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+              <rect x="13.5" y="3" width="7.5" height="5.5" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+              <rect x="13.5" y="11" width="7.5" height="10" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+              <rect x="3" y="14.5" width="7.5" height="6.5" rx="1.5" stroke="currentColor" stroke-width="1.8" />
+            </svg></span><span class="label-text">Dashboard</span>
+        </button>
+        <button class="side-link" id="navSettings">
+          <span class="side-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+                stroke="currentColor" stroke-width="1.5" />
+            </svg></span><span class="label-text">Settings</span>
+        </button>
+      </div>
+
+      <div class="sidebar-bottom">
+        <button class="btn-fab" id="openAddTransactionBtn"><svg class="fab-icon" width="16" height="16"
+            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4V20M4 12H20" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+          </svg><span class="label-text">Add Transaction</span></button>
+      </div>
+    </div>
+
+    <div class="topbar">
+      <div class="hidden" id="image-box">
+        <img src="logo.png" alt="FinTrack Pro" class="logo-img">
+      </div>
+      <span class="user-chip" id="userChip"></span>
+      <button class="btn btn-logout" id="logoutBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <path d="M18.36 6.64a9 9 0 1 1-12.72 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg> Logout</button>
+    </div>
+
+    <div class="main-area">
+
+      <div id="dashboardPage" class="page">
+        <h1 class="page-title">Financial Overview</h1>
+        <p class="page-subtitle">Real-time tracking application</p>
+
+        <!--  balance income expense count -->
+        <div class="cards-grid">
+          <div class="stat-card stub">
+            <span class="stub-tag">No. 001</span>
+            <div class="stat-icon balance">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2.5" y="6" width="19" height="14" rx="2" stroke="currentColor" stroke-width="1.7" />
+                <path d="M2.5 10H21.5" stroke="currentColor" stroke-width="1.7" />
+                <circle cx="12" cy="15" r="2.1" stroke="currentColor" stroke-width="1.7" />
+              </svg></div>
+            <div class="label">Current Balance</div>
+            <div class="value balance" id="cardBalance" style="padding-bottom: 10px;">$0.00</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon income"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 17L10 10L14 14L21 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M15 6H21V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></div>
+            <div class="label">Total Income</div>
+            <div class="value income" id="cardIncome">$0.00</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon expense"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 7L10 14L14 10L21 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <path d="M15 18H21V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg></div>
+            <div class="label">Total Expense</div>
+            <div class="value expense" id="cardExpense">$0.00</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon count"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 2H18V22L15 20L12 22L9 20L6 22V2Z" stroke="currentColor" stroke-width="1.7"
+                  stroke-linejoin="round" />
+                <path d="M9 8H15M9 12H15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+              </svg></div>
+            <div class="label">Total Transactions</div>
+            <div class="value" id="cardCount">0</div>
+          </div>
+        </div>
+
+        <div class="split-row">
+          <div class="panel-card">
+            <h2 class="card-title">Cash Flow Analysis</h2>
+            <div class="chart-wrap">
+              <canvas id="cashFlowChart"></canvas>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <h2 class="card-title">Preferences</h2>
+
+            <div class="toggle-row">
+              <span>Dark Mode</span>
+              <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <hr class="divider">
+
+            <button class="btn btn-danger btn-block" id="resetDataBtn">🗑 Reset All Data</button>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <h2 class="card-title">All Transactions</h2>
+          <div class="txn-toolbar">
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="searchInput" placeholder="Search transactions...">
+            </div>
+            <select class="filter-select" id="typeFilterSelect">
+              <option value="all">All Types</option>
+              <option value="income">Income Only</option>
+              <option value="expense">Expense Only</option>
+            </select>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="transactionTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- profile change ke liye  -->
+      <div id="settingsPage" class="page hidden">
+        <h1 class="page-title">Settings</h1>
+        <p class="page-subtitle">Manage your account profile and app formatting.</p>
+
+        <div class="panel-card" style="max-width: 720px;">
+          <h2 class="card-title">Profile Details</h2>
+          <div class="form-grid-2">
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="settingsName">Full Name</label>
+              <input type="text" id="settingsName" placeholder="Your name">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label for="settingsCurrency">Primary Currency</label>
+              <select id="settingsCurrency">
+                <option value="INR" selected>INR (₹)</option>
+                <option value="USD">USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="GBP">GBP (£)</option>
+                <option value="JPY">JPY (¥)</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-save-dark" id="saveProfileBtn">Save Changes</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- popup / modal  -->
+  <div id="addModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Add Transaction</h3>
+        <button class="close-btn" id="closeModalBtn">✕</button>
+      </div>
+
+      <!-- income / expense  type -->
+      <div class="type-toggle">
+        <button type="button" id="typeIncomeBtn">Income</button>
+        <button type="button" id="typeExpenseBtn">Expense</button>
+      </div>
+
+      <div class="form-group">
+        <label for="txnDescription">Description</label>
+        <input type="text" id="txnDescription" placeholder="e.g. Grocery shopping">
+      </div>
+
+      <div class="form-group">
+        <label for="txnAmount">Amount</label>
+        <input type="number" id="txnAmount" placeholder="0.00" min="0" step="0.01">
+      </div>
+
+      <div class="form-group">
+        <label for="txnDate">Date</label>
+        <input type="date" id="txnDate">
+      </div>
+
+      <div class="form-group">
+        <label for="txnCategory">Category</label>
+        <select id="txnCategory">
+          <option>Food & Dining</option>
+          <option>Shopping</option>
+          <option>Recharge & Bills</option>
+          <option>Petrol & Auto</option>
+          <option>Utilities</option>
+          <option>Salary</option>
+          <option>Entertainment</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-error" id="formError">Please fill in all fields before saving.</div>
+
+      <button class="btn btn-save-dark btn-block" id="saveTransactionBtn">Save Transaction</button>
+    </div>
+  </div>
+
+  <!--- confirm  popup, delete/reset ----->
+  <div id="confirmModal" class="modal-overlay hidden">
+    <div class="modal-box confirm-box">
+      <h3 id="confirmTitle">Are you sure?</h3>
+      <p id="confirmMessage">This action cannot be undone.</p>
+      <div class="confirm-actions">
+        <button class="btn btn-cancel" id="confirmCancelBtn">Cancel</button>
+        <button class="btn btn-danger" id="confirmOkBtn">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!---- succes/error msg box -->
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
