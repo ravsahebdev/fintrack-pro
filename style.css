@@ -1,10 +1,3 @@
-/* =========================================================
-   FinTrack Pro — "Ledger" design system
-   A bank-statement inspired identity: deep ink + brass accent,
-   tabular monospace figures for money, permanent dark chrome
-   navigation (independent of the light/dark content toggle).
-   ========================================================= */
-
 :root {
     /* ink + neutrals */
     --ink: #0e1b2a;
@@ -59,6 +52,8 @@ body.dark {
 
 * {
     box-sizing: border-box;
+    pointer-events: none;
+    user-select: none;
 }
 
 img,
@@ -443,25 +438,6 @@ h2.card-title {
     background: linear-gradient(155deg, var(--ink), var(--vault) 130%);
     border-color: transparent;
     color: #f4f1e8;
-    overflow: hidden;
-}
-
-.stat-card.stub::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 10px;
-    background-image: radial-gradient(circle at 10px 0, var(--paper) 5px, transparent 5.5px);
-    background-size: 20px 10px;
-    background-repeat: repeat-x;
-    background-position: -4px 0;
-    opacity: 0.9;
-}
-
-body.dark .stat-card.stub::after {
-    background-image: radial-gradient(circle at 10px 0, var(--paper) 5px, transparent 5.5px);
 }
 
 .stat-card.stub .stat-icon.balance {
@@ -1199,6 +1175,7 @@ select:focus {
         top: 3px;
         height: 54px;
         padding: 0 16px;
+        justify-content: space-between;
     }
 
     .main-area {
@@ -1360,6 +1337,7 @@ select:focus {
     .login-card {
         padding: 26px 20px;
     }
+
 }
 
 /* very small phones */
@@ -1373,7 +1351,7 @@ select:focus {
     }
 
     .stat-card {
-        padding: 12px;
+        padding: 10px;
     }
 }
 
